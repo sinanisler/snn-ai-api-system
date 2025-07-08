@@ -1,0 +1,379 @@
+/**
+ * Admin CSS for SNN AI API System
+ * 
+ * @package SNN_AI_API_System
+ * @since 1.0.0
+ */
+
+/* General Styles */
+.snn-ai-loading {
+    position: relative;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.snn-ai-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: snn-ai-spin 1s linear infinite;
+}
+
+@keyframes snn-ai-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Chat Interface Styles */
+.snn-ai-chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+}
+
+.snn-ai-chat-header {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    border-bottom: 1px solid #c3c4c7;
+    background: #f9f9f9;
+}
+
+.snn-ai-chat-header select {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+}
+
+.snn-ai-chat-messages {
+    height: 400px;
+    padding: 15px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.snn-ai-message {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.snn-ai-message-user {
+    background: #e7f3ff;
+    border-left: 4px solid #2271b1;
+    margin-left: 20%;
+}
+
+.snn-ai-message-assistant {
+    background: #f0f0f1;
+    border-left: 4px solid #646970;
+    margin-right: 20%;
+}
+
+.snn-ai-message-role {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #646970;
+    margin-bottom: 5px;
+}
+
+.snn-ai-message-content {
+    line-height: 1.6;
+}
+
+.snn-ai-chat-input {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    border-top: 1px solid #c3c4c7;
+    background: #f9f9f9;
+}
+
+.snn-ai-chat-input textarea {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.snn-ai-chat-input button {
+    padding: 8px 16px;
+    background: #2271b1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: fit-content;
+    align-self: flex-end;
+}
+
+.snn-ai-chat-input button:hover {
+    background: #135e96;
+}
+
+.snn-ai-chat-input button:disabled {
+    background: #c3c4c7;
+    cursor: not-allowed;
+}
+
+/* Provider Settings Styles */
+.snn-ai-provider-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.snn-ai-provider-card h3 {
+    margin-top: 0;
+    color: #1d2327;
+}
+
+.snn-ai-provider-card .description {
+    color: #646970;
+    margin-bottom: 15px;
+}
+
+.snn-ai-provider-card .status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.snn-ai-provider-card .status.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.snn-ai-provider-card .status.inactive {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.snn-ai-provider-form {
+    margin-top: 15px;
+}
+
+.snn-ai-provider-form .form-table {
+    margin-top: 0;
+}
+
+.snn-ai-provider-form .form-table th {
+    width: 200px;
+    font-weight: 600;
+}
+
+.snn-ai-provider-form .form-table td {
+    padding: 15px 10px;
+}
+
+.snn-ai-provider-form input[type="text"],
+.snn-ai-provider-form input[type="url"],
+.snn-ai-provider-form select {
+    width: 100%;
+    max-width: 400px;
+}
+
+.snn-ai-provider-form .description {
+    color: #646970;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Template Builder Styles */
+.snn-ai-template-builder {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.snn-ai-template-builder .form-table {
+    margin-top: 0;
+}
+
+.snn-ai-template-builder .form-table th {
+    width: 200px;
+    font-weight: 600;
+}
+
+.snn-ai-template-builder .form-table td {
+    padding: 15px 10px;
+}
+
+.snn-ai-template-builder input[type="text"],
+.snn-ai-template-builder textarea {
+    width: 100%;
+    max-width: 600px;
+}
+
+.snn-ai-template-builder textarea {
+    height: 120px;
+    font-family: monospace;
+}
+
+.snn-ai-query-builder {
+    background: #f9f9f9;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.snn-ai-query-builder h4 {
+    margin-top: 0;
+    color: #1d2327;
+}
+
+.snn-ai-query-builder .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.snn-ai-query-builder .form-row label {
+    min-width: 120px;
+    font-weight: 600;
+}
+
+.snn-ai-query-builder .form-row input,
+.snn-ai-query-builder .form-row select {
+    flex: 1;
+    max-width: 300px;
+}
+
+.snn-ai-dynamic-tags {
+    background: #f9f9f9;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.snn-ai-dynamic-tags h4 {
+    margin-top: 0;
+    color: #1d2327;
+}
+
+.snn-ai-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.snn-ai-tag {
+    background: #2271b1;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.snn-ai-tag:hover {
+    background: #135e96;
+}
+
+/* Usage Statistics Styles */
+.snn-ai-usage-stats {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.snn-ai-usage-stats .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.snn-ai-usage-stats .stat-card {
+    background: #f9f9f9;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+}
+
+.snn-ai-usage-stats .stat-card .stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.snn-ai-usage-stats .stat-card .stat-label {
+    color: #646970;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .snn-ai-chat-header {
+        flex-direction: column;
+    }
+    
+    .snn-ai-chat-input {
+        flex-direction: column;
+    }
+    
+    .snn-ai-query-builder .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .snn-ai-query-builder .form-row label {
+        min-width: auto;
+    }
+}
+
+/* Utility Classes */
+.snn-ai-hidden {
+    display: none !important;
+}
+
+.snn-ai-text-center {
+    text-align: center;
+}
+
+.snn-ai-text-right {
+    text-align: right;
+}
+
+.snn-ai-mb-10 {
+    margin-bottom: 10px;
+}
+
+.snn-ai-mb-20 {
+    margin-bottom: 20px;
+}
+
+.snn-ai-mt-10 {
+    margin-top: 10px;
+}
+
+.snn-ai-mt-20 {
+    margin-top: 20px;
+}
