@@ -24,22 +24,29 @@ class SNN_AI_Provider_Manager {
     }
     
     private function load_providers() {
-        // Load provider classes
-        $provider_files = [
-            'openai' => SNN_AI_API_SYSTEM_PLUGIN_DIR . 'providers/openai/class-snn-ai-openai-provider.php',
-            'openrouter' => SNN_AI_API_SYSTEM_PLUGIN_DIR . 'providers/openrouter/class-snn-ai-openrouter-provider.php',
-            'anthropic' => SNN_AI_API_SYSTEM_PLUGIN_DIR . 'providers/anthropic/class-snn-ai-anthropic-provider.php'
-        ];
-        
-        foreach ($provider_files as $name => $file) {
-            if (file_exists($file)) {
+        $provider_dirs = glob( SNN_AI_API_SYSTEM_PLUGIN_DIR . 'providers/*', GLOB_ONLYDIR );
+
+        foreach ( $provider_dirs as $dir ) {
+            $provider_name = basename( $dir );
+            $file = $dir . '/class-snn-ai-' . $provider_name . '-provider.php';
+            if ( file_exists( $file ) ) {
                 require_once $file;
-                $class_name = 'SNN_AI_' . ucfirst($name) . '_Provider';
-                if (class_exists($class_name)) {
-                    $this->providers[$name] = new $class_name();
+                $class_name = 'SNN_AI_' . str_replace( '-', '_', ucwords( $provider_name, '-' ) ) . '_Provider';
+                if ( class_exists( $class_name ) ) {
+                    $this->providers[ $provider_name ] = new $class_name();
                 }
             }
         }
+    }
+
+    public function get_active_providers() {
+        $active_providers = [];
+        foreach ( $this->providers as $name => $provider ) {
+            if ( $provider->is_active() ) {
+                $active_providers[ $name ] = $provider;
+            }
+        }
+        return $active_providers;
     }
     
     public function get_providers() {

@@ -152,46 +152,34 @@ class SNN_AI_Admin_Manager {
     }
     
     public function dashboard_page() {
-        ?>
-        <div class="wrap">
-            <h1>SNN AI API System Dashboard</h1>
-            <div class="snn-ai-dashboard">
-                <div class="snn-ai-cards">
-                    <div class="snn-ai-card">
-                        <h3>System Status</h3>
-                        <p>Plugin Version: <?php echo $this->version; ?></p>
-                        <p>Status: <span class="status-active">Active</span></p>
-                    </div>
-                    
-                    <div class="snn-ai-card">
-                        <h3>Providers</h3>
-                        <?php
-                        $providers = get_option('snn_ai_providers', []);
-                        $active_providers = array_filter($providers, function($provider) {
-                            return !empty($provider['api_key']);
-                        });
-                        ?>
-                        <p>Active Providers: <?php echo count($active_providers); ?></p>
-                        <p><a href="<?php echo admin_url('admin.php?page=snn-ai-providers'); ?>">Manage Providers</a></p>
-                    </div>
-                    
-                    <div class="snn-ai-card">
-                        <h3>Recent Activity</h3>
-                        <p>API Calls Today: 0</p>
-                        <p>Last Call: Never</p>
-                        <p><a href="<?php echo admin_url('admin.php?page=snn-ai-logs'); ?>">View Logs</a></p>
-                    </div>
-                </div>
-                
-                <div class="snn-ai-quick-actions">
-                    <h3>Quick Actions</h3>
-                    <a href="<?php echo admin_url('admin.php?page=snn-ai-providers'); ?>" class="button button-primary">Configure Providers</a>
-                    <a href="<?php echo admin_url('admin.php?page=snn-ai-templates'); ?>" class="button">Manage Templates</a>
-                    <a href="<?php echo admin_url('admin.php?page=snn-ai-settings'); ?>" class="button">Settings</a>
-                </div>
-            </div>
-        </div>
-        <?php
+        $provider_manager = SNN_AI_API_System::get_instance()->get_provider_manager();
+        $active_providers = $provider_manager->get_active_providers();
+        $usage_stats = $this->get_usage_stats();
+
+        include_once SNN_AI_API_SYSTEM_PLUGIN_DIR . 'admin/views/dashboard.php';
+    }
+
+    private function get_usage_stats() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'snn_ai_usage';
+
+        if ( ! $this->table_exists( $table_name ) ) {
+            return [];
+        }
+
+        $results = $wpdb->get_results(
+            "SELECT provider, COUNT(*) as requests, SUM(tokens_used) as total_tokens, SUM(cost) as total_cost
+            FROM {$table_name}
+            GROUP BY provider",
+            ARRAY_A
+        );
+
+        return $results;
+    }
+
+    private function table_exists( $table_name ) {
+        global $wpdb;
+        return $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) === $table_name;
     }
     
     public function providers_page() {

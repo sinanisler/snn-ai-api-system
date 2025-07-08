@@ -131,6 +131,19 @@ class SNN_AI_DB_Manager {
         dbDelta($logs_sql);
         dbDelta($cache_sql);
         dbDelta($usage_sql);
+
+        // Template variables table
+        $template_variables_table = $this->wpdb->prefix . 'snn_ai_template_variables';
+        $template_variables_sql = "CREATE TABLE $template_variables_table (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            template_id mediumint(9) NOT NULL,
+            variable_name varchar(100) NOT NULL,
+            variable_type varchar(50) NOT NULL,
+            default_value text,
+            PRIMARY KEY (id)
+        ) $charset_collate;";
+
+        dbDelta($template_variables_sql);
     }
     
     /**

@@ -86,6 +86,36 @@ abstract class SNN_AI_Abstract_Provider implements SNN_AI_Provider_Interface {
             'Authorization' => 'Bearer ' . $this->api_key
         ];
     }
+
+    protected function validate_model( $model ) {
+        return isset( $this->models[ $model ] );
+    }
+
+    protected function sanitize_messages( $messages ) {
+        $sanitized_messages = [];
+        foreach ( $messages as $message ) {
+            $sanitized_message = [];
+            if ( isset( $message['role'] ) ) {
+                $sanitized_message['role'] = sanitize_text_field( $message['role'] );
+            }
+            if ( isset( $message['content'] ) ) {
+                $sanitized_message['content'] = sanitize_textarea_field( $message['content'] );
+            }
+            $sanitized_messages[] = $sanitized_message;
+        }
+        return $sanitized_messages;
+    }
+
+    protected function log_request( $endpoint, $data, $response ) {
+        $logger = SNN_AI_API_System::get_instance()->get_logger();
+        $log_data = [
+            'provider' => $this->name,
+            'endpoint' => $endpoint,
+            'request_data' => $data,
+            'response' => $response,
+        ];
+        $logger->log( 'API Request', 'info', $log_data );
+    }
     
     // Default implementations that can be overridden
     public function chat($args) {
