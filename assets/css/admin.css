@@ -1,0 +1,104 @@
+/* SNN AI API System Admin Styles */
+
+.snn-ai-dashboard {
+    margin-top: 20px;
+}
+
+.snn-ai-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.snn-ai-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.snn-ai-card h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.snn-ai-card p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.snn-ai-card .status-active {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.snn-ai-quick-actions {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.snn-ai-quick-actions h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.snn-ai-quick-actions .button {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+/* Provider page styles */
+.snn-ai-providers .form-table th {
+    width: 150px;
+    font-weight: 600;
+}
+
+.snn-ai-providers .form-table input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Settings page styles */
+.snn-ai-settings .form-table th {
+    width: 200px;
+}
+
+/* Logs page styles */
+.snn-ai-logs {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Templates page styles */
+.snn-ai-templates {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .snn-ai-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .snn-ai-quick-actions .button {
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+}
